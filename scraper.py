@@ -84,7 +84,14 @@ def get_jobs(keyword, num_jobs, verbose, sleep):
                     job_description = driver.find_element(by=By.CLASS_NAME,
                                                           value='jobDescriptionContent').text
                     # job_description = driver.find_element_by_xpath('.//div[@class="jobDescriptionContent desc"]').text
+
+                    # try:
+                    #     driver.find_element(by=By.TAG_NAME, value='button').click()
+                    # except:
+                    #     pass
+
                     collected_successfully = True
+
                 except:
                     time.sleep(5)
 
@@ -100,6 +107,8 @@ def get_jobs(keyword, num_jobs, verbose, sleep):
                                              value='e1tk4kwz2').text
             except NoSuchElementException:
                 rating = -1 #You need to set a "not found value. It's important."
+
+
 
             #Printing for debugging
             if verbose:
@@ -208,8 +217,8 @@ def get_jobs(keyword, num_jobs, verbose, sleep):
 
         #Clicking on the "next page" button
         try:
-            driver.find_element(by=By.XPATH,
-                                value='.//li[@class="next"]//a').click()
+            driver.find_element(by=By.CLASS_NAME,
+                                value='nextButton').click()
         except NoSuchElementException:
             print("Scraping terminated before reaching target number of jobs. Needed {}, got {}.".format(num_jobs, len(jobs)))
             break
